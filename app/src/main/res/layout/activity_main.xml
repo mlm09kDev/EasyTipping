@@ -11,148 +11,295 @@
 
     </data>
 
-    <LinearLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical"
         tools:context=".MainActivity">
 
+
         <LinearLayout
-            android:layout_width="match_parent"
+            android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_weight="6"
             android:background="@color/colorPrimary"
-            android:orientation="vertical">
+            app:layout_constraintBottom_toTopOf="@+id/space"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.0" />
 
-            <TextView
-                android:id="@+id/bill_total_text"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:text="Bill Subtotal" />
+        <TextView
+            android:id="@+id/bill_total_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:ems="10"
+            android:text="Bill Subtotal ($)"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <EditText
-                android:id="@+id/bill_total"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:ems="9"
-                android:text="@={viewModel.editTextContent}" />
+        <TextView
+            android:id="@+id/symbol"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="$"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/bill_total"
+            app:layout_constraintStart_toStartOf="@+id/bill_total_text"
+            app:layout_constraintTop_toBottomOf="@+id/bill_total_text"
+            app:layout_constraintVertical_bias="0.476" />
 
-            <TextView
-                android:id="@+id/tip_percent_text"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:ems="10"
-                android:text="tip" />
+        <EditText
+            android:id="@+id/bill_total"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:autoText="false"
+            android:baselineAligned="false"
 
-            <SeekBar
-                android:id="@+id/seekBar2"
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:maxWidth="50dp"
-                android:minWidth="5dp"
-                android:thumbOffset="10dp" />
+            android:ems="10"
+            android:hapticFeedbackEnabled="true"
+            android:hint="00.00"
+            android:inputType="number|numberDecimal"
+            android:singleLine="true"
+            android:text="@={viewModel._billSubTotal}"
+            android:textColor="#fff"
+            android:textColorHint="#fff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/bill_total_text"
+            app:layout_constraintStart_toEndOf="@+id/symbol"
+            app:layout_constraintTop_toBottomOf="@+id/bill_total_text"
+            tools:text="100.00" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:text="Split" />
+        <TextView
+            android:id="@+id/tip_percent_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:ems="10"
+            android:text="Tip (%)"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/bill_total"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/bill_total" />
 
-            <SeekBar
-                android:id="@+id/seekBar3"
-                android:layout_width="200dp"
-                android:layout_height="0dp"
-                android:layout_weight="1"
-                android:maxWidth="50dp"
-                android:scrollbarThumbHorizontal="@color/colorPrimary" />
-        </LinearLayout>
+        <TextView
+            android:id="@+id/tip_percent_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:text="@={``+ viewModel.tipPercentValue}"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintStart_toStartOf="@+id/tip_percent_text"
+            app:layout_constraintTop_toBottomOf="@+id/tip_percent_text"
+            tools:text="20" />
+
+        <SeekBar
+            android:id="@+id/seekBar2"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:baselineAligned="false"
+            android:max="50"
+            android:min="10"
+            android:progress="@={viewModel.tipPercentValue}"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/tip_percent_value"
+            app:layout_constraintEnd_toEndOf="@+id/tip_percent_text"
+            app:layout_constraintStart_toEndOf="@+id/tip_percent_value"
+            app:layout_constraintTop_toTopOf="@+id/tip_percent_value" />
 
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="6"
-            android:orientation="vertical">
+        <TextView
+            android:id="@+id/split_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:baselineAligned="false"
+            android:text="Split"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/seekBar2"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tip_percent_value" />
 
-            <TextView
-                android:id="@+id/total_bill_text"
-                android:layout_width="204dp"
-                android:layout_height="47dp"
-                android:layout_weight="1"
-                android:text="bill total"
-                app:layout_constraintStart_toStartOf="parent" />
+        <TextView
+            android:id="@+id/split_value"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:text="@={``+ viewModel.splitValue}"
+            android:textColor="#fff"
+            android:textSize="30sp"
+            app:layout_constraintEnd_toEndOf="@+id/tip_percent_value"
+            app:layout_constraintStart_toStartOf="@+id/split_text"
+            app:layout_constraintTop_toBottomOf="@+id/split_text"
+            tools:text="2" />
 
-            <TextView
-                android:id="@+id/total_bill"
-                android:layout_width="204dp"
-                android:layout_height="47dp"
-                android:layout_weight="1"
-                android:text="@{viewModel.displayedEditTextContent}"
-                app:layout_constraintBottom_toTopOf="@+id/total_bill_per_person_text"
-                app:layout_constraintStart_toStartOf="@+id/total_bill_text"
-                app:layout_constraintTop_toBottomOf="@+id/total_bill_text" />
+        <SeekBar
+            android:id="@+id/split_seek_bar"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:baselineAligned="false"
+            android:max="25"
+            android:min="1"
+            android:progress="@={viewModel.splitValue}"
+            android:textColor="#fff"
+            android:textSize="20sp"
+            app:layout_constraintBottom_toBottomOf="@+id/split_value"
+            app:layout_constraintEnd_toEndOf="@+id/split_text"
+            app:layout_constraintStart_toStartOf="@+id/seekBar2"
+            app:layout_constraintTop_toTopOf="@+id/split_value" />
 
-            <TextView
-                android:id="@+id/total_bill_per_person_text"
-                android:layout_width="409dp"
-                android:layout_height="47dp"
-                android:layout_weight="1"
-                android:text="Total per person"
-                app:layout_constraintBottom_toTopOf="@+id/total_bill_per_person"
-                app:layout_constraintStart_toStartOf="@+id/total_bill" />
 
-            <TextView
-                android:id="@+id/total_bill_per_person"
-                android:layout_width="409dp"
-                android:layout_height="47dp"
-                android:layout_weight="1"
-                android:text="$300"
-                app:layout_constraintBottom_toTopOf="@+id/total_tip_text"
-                app:layout_constraintStart_toStartOf="@+id/total_bill_per_person_text" />
+        <Space
+            android:id="@+id/space"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.432" />
 
-            <TextView
-                android:id="@+id/total_tip_text"
-                android:layout_width="409dp"
-                android:layout_height="47dp"
-                android:layout_weight="1"
-                android:text="total tip"
-                app:layout_constraintBottom_toTopOf="@+id/total_tip"
-                app:layout_constraintStart_toStartOf="@+id/total_bill_per_person" />
+        <TextView
+            android:id="@+id/total_bill_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_weight="1"
+            android:text="Bill Total"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/split_seek_bar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/space" />
 
-            <TextView
-                android:id="@+id/total_tip"
-                android:layout_width="409dp"
-                android:layout_height="47dp"
-                android:layout_weight="1"
-                android:text="$60"
-                app:layout_constraintBottom_toTopOf="@+id/tip_total_per_person_text"
-                app:layout_constraintStart_toStartOf="@+id/total_tip_text" />
+        <TextView
+            android:id="@+id/total_bill_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="@{String.format(@string/format_amount,viewModel.totalBillAmount)}"
+            android:textColor="#000"
+            android:singleLine="true"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/total_bill_text"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/total_bill_text"
+            app:layout_constraintTop_toBottomOf="@+id/total_bill_text"
+            tools:text="$120.00" />
 
-            <TextView
-                android:id="@+id/tip_total_per_person_text"
-                android:layout_width="204dp"
-                android:layout_height="47dp"
-                android:layout_weight="1"
-                android:text="tip per person"
-                app:layout_constraintBottom_toTopOf="@+id/tip_total_per_person"
-                app:layout_constraintStart_toStartOf="@+id/total_tip" />
 
-            <TextView
-                android:id="@+id/tip_total_per_person"
-                android:layout_width="204dp"
-                android:layout_height="48dp"
-                android:layout_weight="1"
-                android:text="$60"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="@+id/tip_total_per_person_text" />
+        <TextView
+            android:id="@+id/total_tip_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Total Tip"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/total_bill_amount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/total_bill_text"
+            app:layout_constraintTop_toBottomOf="@+id/total_bill_amount" />
 
-        </LinearLayout>
-    </LinearLayout>
+        <TextView
+            android:id="@+id/total_tip_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+
+            android:text="@{String.format(@string/format_amount,viewModel.totalTipAmount)}"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/total_tip_text"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/total_bill_amount"
+            app:layout_constraintTop_toBottomOf="@+id/total_tip_text"
+            tools:text="$20.00" />
+
+        <TextView
+            android:id="@+id/tip_total_per_person_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Tip per Person"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/total_tip_amount"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/total_bill_text"
+            app:layout_constraintTop_toBottomOf="@+id/total_tip_amount" />
+
+        <TextView
+            android:id="@+id/tip_total_per_person_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:singleLine="true"
+
+            android:text="@{String.format(@string/format_amount,viewModel.tipTotalPerPersonAmount)}"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/tip_total_per_person_text"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/total_bill_amount"
+            app:layout_constraintTop_toBottomOf="@+id/tip_total_per_person_text"
+            tools:text="$10.00" />
+
+        <TextView
+            android:id="@+id/total_bill_per_person_text"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:text="Total per Person"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/tip_total_per_person_amount"
+            app:layout_constraintStart_toStartOf="@+id/total_bill_text"
+            app:layout_constraintTop_toBottomOf="@+id/tip_total_per_person_amount" />
+
+        <TextView
+            android:id="@+id/total_bill_per_person_amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_weight="1"
+            android:singleLine="true"
+
+            android:text="@{String.format(@string/format_amount,viewModel.totalBillPerPersonAmount)}"
+            android:textColor="#000"
+            android:textSize="20sp"
+            app:layout_constraintEnd_toEndOf="@+id/total_bill_per_person_text"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/total_bill_amount"
+            app:layout_constraintTop_toBottomOf="@+id/total_bill_per_person_text"
+            tools:text="$60.00" />
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

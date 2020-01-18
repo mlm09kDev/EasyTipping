@@ -18,8 +18,17 @@ class MainActivity : AppCompatActivity() {
             this.viewModel = viewModel
         }
 
-        viewModel.editTextContent.observe(this, Observer {
-            viewModel.setText()
+
+        viewModel.init()
+
+        viewModel.billSubTotal.observe(this, Observer {
+            viewModel.calcTotals()
+        })
+        viewModel.tipPercentValue.observe(this, Observer {
+            viewModel.calcTotals()
+        })
+        viewModel.splitValue.observe(this, Observer {
+            viewModel.calcTotals()
         })
     }
 }

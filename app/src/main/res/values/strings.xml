@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Easy Tipping</string>
+    <string name="format_amount">$%,.2f</string>
+    <string name="format_percent">%%</string>
 </resources>
